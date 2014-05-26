@@ -48,12 +48,16 @@ DocStore.prototype.list = function (profile, callback) {
     ref.once('value', function (snapshot) {
       console.log('snapshot:', snapshot);
       var docs = snapshot.val();
-      var result = Object.keys(docs).map(function (id) {
-        return {
-          doc_id: id,
-          title:  docs[id].title
-        };
-      });
+      var result = [];
+      if (docs) {
+        result = Object.keys(docs).map(function (id) {
+          return {
+            doc_id: id,
+            title:  docs[id].title
+          };
+        });  
+      }
+      
       callback(null, result);
     });
 
