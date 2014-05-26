@@ -1,5 +1,5 @@
 {
-  "firebase": "brilliant-fire-7193",
+  "firebase": "mdocs",
   "public": ".",
   "ignore": [
     "firebase.json",
