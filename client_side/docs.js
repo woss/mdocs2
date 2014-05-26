@@ -8,7 +8,7 @@ DocStore.prototype.get_base_ref = function (path, callback) {
     path = '';
   }
 
-  var url = 'https://brilliant-fire-7193.firebaseio.com';
+  var url = 'https://mdocs.firebaseio.com';
   var firepadRef = new Firebase(url + path);
 
   return firepadRef.auth(this._token, function (err) {
