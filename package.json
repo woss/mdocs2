@@ -27,7 +27,7 @@
     "caja-sanitizer": "~0.1.2"
   },
   "scripts": {
-    "start": "watchify client_side/index.js -t jadeify -d -o main.js -v & serve"
+    "start": "make build & watchify client_side/index.js -t jadeify -d -o main.js -v & serve"
   },
   "repository": "",
   "author": "",
