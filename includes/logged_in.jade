@@ -1,11 +1,20 @@
 .dropdown.pull-right()
   a.btn.dropdown-toggle(href="#", data-toggle="dropdown", role="button")
-    if profile.identities[0].isSocial
-      | #{profile.name + ' '}
+    if profile.identities.length === 1 && profile.identities[0].connection === 'anonymous'
+      | Anonymous
     else
-      | #{profile.name} [at #{profile.identities[0].connection + ' '}]
+      if profile.identities[0].isSocial
+        | #{profile.name + ' '}
+      else
+        | #{profile.name} [at #{profile.identities[0].connection + ' '}]
+    | &nbsp;
     span.caret
   ul.dropdown-menu(role="menu", aria-labelledby="dLabel")
+    if profile.identities.length === 1 && profile.identities[0].connection === 'anonymous'
+      li
+        a(href="https://mdocs.auth0.com/authorize?response_type=token&scope=openid%20profile&client_id=TnzEhJw9ADNWAICY3vRlb7sdj9pMWcQJ&redirect_uri=" + window.location.href.split('#')[0] + "&access_token=" + profile.access_token)
+          span.icon-user
+          |  link my account
     li
       a(href="#/logout")
         span.icon-signout
