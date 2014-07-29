@@ -81,7 +81,17 @@ function logout () {
   window.location.hash = '#/';
 }
 
+function login_on_connection (connection, docId) {
+  store.set('return_url_after_login', '#/docs/' + docId);
+  widget
+    .getClient()
+    .signin({
+      connection: connection
+    });
+}
+
 module.exports = {
   login: login,
-  logout: logout
+  logout: logout,
+  login_on_connection: login_on_connection
 };

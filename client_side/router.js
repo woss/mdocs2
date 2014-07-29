@@ -34,7 +34,8 @@ var routes = {
   '/logout': auth.logout,
   '/docs': [ clean_content, require_login(docs_list.load) ],
   '/new': docs_list.create_new,
-  '/docs/:docId': [ clean_content, require_login(editor.load) ]
+  '/docs/:docId': [ clean_content, require_login(editor.load) ],
+  '/connection/:connection/docs/:docId': auth.login_on_connection,
 };
 
 var router = Router(routes);
