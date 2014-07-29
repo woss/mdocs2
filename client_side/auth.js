@@ -3,6 +3,7 @@ var Auth0Widget    = require('auth0-widget.js');
 var store          = require('store');
 var logged_in_tmpl = require('../includes/logged_in.jade');
 var anonymator     = require('./anonymator');
+var spin = require('./spin');
 
 var widget = new Auth0Widget({
   domain:                 'mdocs.auth0.com',
@@ -18,6 +19,8 @@ if (store.get('firepad_profile')) {
 
 var result = widget.parseHash(location.hash);
 if (result) {
+  var spinner = spin();
+
   widget.getProfile(result.id_token, function (err, profile) {
     if (err || !profile) return;
 
@@ -27,6 +30,7 @@ if (result) {
       profile.firebase_token = delegationResult.id_token;
       store.set('firepad_profile', profile);
       login_fin(profile);
+      spinner.stop();
     });
   });
 }
