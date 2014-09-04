@@ -1,17 +1,14 @@
 var $              = require('jquery');
-var Auth0Widget    = require('auth0-widget.js');
+var Auth0Lock      = require('auth0-lock');
 var store          = require('store');
 var logged_in_tmpl = require('../includes/logged_in.jade');
 var anonymator     = require('./anonymator');
 var spin = require('./spin');
 
-var widget = new Auth0Widget({
-  domain:                 'mdocs.auth0.com',
-  clientID:               'TnzEhJw9ADNWAICY3vRlb7sdj9pMWcQJ',
-  callbackURL:            window.location.href.split('#')[0],
-  callbackOnLocationHash: true,
-  userPwdConnectionName:  'mdocs.io'
-});
+var widget = new Auth0Lock(
+  'TnzEhJw9ADNWAICY3vRlb7sdj9pMWcQJ',
+  'mdocs.auth0.com'
+);
 
 if (store.get('firepad_profile')) {
   login_fin(store.get('firepad_profile'));
@@ -26,7 +23,11 @@ if (result) {
 
     profile.access_token = result.access_token;
 
-    widget.getClient().getDelegationToken('bzj2zx2pENhu4UcoKKNGNwYz7mZ2NaDC', result.id_token, {}, function (err, delegationResult) {
+    widget.getClient().getDelegationToken({
+      target: 'bzj2zx2pENhu4UcoKKNGNwYz7mZ2NaDC',
+      id_token: result.id_token,
+      api_type: 'app'
+    }, function (err, delegationResult) {
       profile.firebase_token = delegationResult.id_token;
       store.set('firepad_profile', profile);
       login_fin(profile);
@@ -53,10 +54,10 @@ function login_fin(profile) {
   }
 }
 
-widget.on('signin_ready', function() {
+widget.on('signin ready', function() {
   $('.anonymous-login').remove();
-  $('<a href="#" class="anonymous-login a0-btn-small">Login anonymously</a>')
-    .appendTo('.a0-buttons-actions')
+  $('<a href="#" style="margin-top: 5px;" class="anonymous-login a0-btn-small">Login anonymously</a>')
+    .appendTo('.a0-db-actions')
     .on('click', function (e) {
       e.preventDefault();
 
@@ -73,8 +74,10 @@ widget.on('signin_ready', function() {
 });
 
 function login() {
-  widget.signin({
-    scope: 'openid profile'
+  widget.show({
+    scope: 'openid profile',
+    responseType: 'token',
+    defaultUserPasswordConnection: 'mdocs.io'
   });
 }
 

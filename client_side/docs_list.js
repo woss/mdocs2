@@ -18,7 +18,7 @@ function load () {
 
   docs.list(profile, function (err, docs) {
     $('.content')
-      .html(doc_list({docs: docs}));
+      .html(doc_list({docs: docs || []}));
   });
 }
 
