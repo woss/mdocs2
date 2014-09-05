@@ -26,7 +26,7 @@ if (result) {
     widget.getClient().getDelegationToken({
       target: 'bzj2zx2pENhu4UcoKKNGNwYz7mZ2NaDC',
       id_token: result.id_token,
-      api_type: 'app'
+      api_type: 'firebase'
     }, function (err, delegationResult) {
       profile.firebase_token = delegationResult.id_token;
       store.set('firepad_profile', profile);
