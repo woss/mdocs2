@@ -4,17 +4,15 @@ Backendless collaborative markdown editor powered by [Firebase](http://firebase.
 
 ![](https://cloudup.com/ce3jy2ghXMx+)
 
-#How to run it
+# How to run it
 
 In order to run mdocs, all you need to have is NodeJS installed.
-
-If you're running on Linux, I recommend installing NodeJS [using this](https://github.com/creationix/nvm)
 
 Once you have it installed, just run the following commands:
 
 ````js
 npm install
-npm start
+make run
 ````
 
 Now go to [http://localhost:3000/](http://localhost:3000/) and watch the awesomeness work :D.
