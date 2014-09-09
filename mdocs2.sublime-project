@@ -1,0 +1,9 @@
+{
+  "folders":
+  [
+    {
+      "path": "./",
+      "file_exclude_patterns": ["main.js", "main.min.js", "index.html"]
+    }
+  ]
+}

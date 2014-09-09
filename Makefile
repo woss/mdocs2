@@ -8,6 +8,7 @@ html:
 
 js:
 	@node_modules/.bin/browserify client_side/index.js -t jadeify -d -o main.js
+	@node_modules/.bin/uglifyjs main.js > main.min.js
 	@echo "generated main.js"
 
 clean:
