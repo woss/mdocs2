@@ -93,7 +93,9 @@ function login_on_connection (connection, docId) {
   widget
     .getClient()
     .signin({
-      connection: connection
+      connection: connection,
+      response_type: 'token',
+      scope: 'openid profile',
     });
 }
 
