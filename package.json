@@ -12,7 +12,7 @@
     "code-mirror": "~3.22.0",
     "css-import": "0.0.1",
     "director": "~1.2.3",
-    "editable": "0.1.1",
+    "editable": "git+https://github.com/jfromaniello/editable.git#textContext_issue",
     "ejsify": "0.0.2",
     "express": "~3.4.8",
     "firepad": "git+https://github.com/jfromaniello/firepad.git#commonjs-support",
