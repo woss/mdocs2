@@ -5,8 +5,10 @@ var logged_in_tmpl = require('../includes/logged_in.jade');
 var anonymator     = require('./anonymator');
 var spin = require('./spin');
 
+var auth0_client_id = 'TnzEhJw9ADNWAICY3vRlb7sdj9pMWcQJ';
+
 var widget = new Auth0Lock(
-  'TnzEhJw9ADNWAICY3vRlb7sdj9pMWcQJ',
+  auth0_client_id,
   'mdocs.auth0.com'
 );
 
@@ -24,7 +26,7 @@ if (result) {
     profile.access_token = result.access_token;
 
     widget.getClient().getDelegationToken({
-      target: 'bzj2zx2pENhu4UcoKKNGNwYz7mZ2NaDC',
+      target: auth0_client_id,
       id_token: result.id_token,
       api_type: 'firebase'
     }, function (err, delegationResult) {
