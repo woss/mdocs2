@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "devDependencies": {
-    "auth0-lock": "~6.2.2",
+    "auth0-lock": "~6.3.6",
     "brfs": "~1.0.0",
     "browserify": "~3.32.1",
     "browserify-middleware": "~2.4.0",
