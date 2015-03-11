@@ -5,11 +5,11 @@ var logged_in_tmpl = require('../includes/logged_in.jade');
 var anonymator     = require('./anonymator');
 var spin = require('./spin');
 
-var auth0_client_id = 'TnzEhJw9ADNWAICY3vRlb7sdj9pMWcQJ';
+var auth0_client_id = 'lGMPDJXSRDiu1epPmclQTG6MhxzqjRwa';
 
 var widget = new Auth0Lock(
   auth0_client_id,
-  'mdocs.auth0.com'
+  'woss.auth0.com'
 );
 
 if (store.get('firepad_profile')) {

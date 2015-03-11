@@ -8,7 +8,7 @@ DocStore.prototype.get_base_ref = function (path, callback) {
     path = '';
   }
 
-  var url = 'https://mdocs.firebaseio.com';
+  var url = 'https://mdocs2-woss.firebaseio.com';
   var firepadRef = new Firebase(url + path);
 
   return firepadRef.auth(this._token, function (err) {
@@ -29,7 +29,7 @@ DocStore.prototype.get_doc = function (user, doc_id, callback) {
 
     var doc_meta = ref.parent().parent()
                      .child('users')
-                     .child(user.fb_id)
+                     .child(user.user_id)
                      .child(doc_id);
 
     ref.child('title').on('value', function (v) {
@@ -42,7 +42,7 @@ DocStore.prototype.get_doc = function (user, doc_id, callback) {
 };
 
 DocStore.prototype.list = function (profile, callback) {
-  this.get_base_ref('/users/' + profile.fb_id, function (err, ref) {
+  this.get_base_ref('/users/' + profile.user_id, function (err, ref) {
     if (err) return callback(err);
 
     ref.once('value', function (snapshot) {
@@ -72,7 +72,7 @@ DocStore.prototype.create_new = function (owner, callback) {
     var users_ref = base_ref.child('users');
 
     var new_doc = { owners: {} };
-    new_doc.owners[owner.fb_id] = { can_write: true };
+    new_doc.owners[owner.user_id] = { can_write: true };
 
     var docRef = docs_ref.push(new_doc, function (err) {
       if (err) {
@@ -82,7 +82,7 @@ DocStore.prototype.create_new = function (owner, callback) {
       var doc_id = docRef.toString().split('/').slice(-1)[0];
 
       users_ref
-        .child(owner.fb_id)
+        .child(owner.user_id)
         .child(doc_id)
         .set(true);
 
